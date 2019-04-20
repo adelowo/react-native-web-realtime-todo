@@ -123,6 +123,7 @@ export default class App extends Component {
         <FlatList
           style={styles.list}
           data={this.state.tasks}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View>
               <View style={styles.listItemCont}>
