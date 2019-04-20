@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import Alert from './Alert';
-import Pusher from 'pusher-js';
+import Pusher from 'pusher-js/react-native';
 
 const APP_KEY = 'b738d32478149fc5b339';
 const APP_CLUSTER = 'eu';
@@ -129,16 +129,13 @@ export default class App extends Component {
                 <Text
                   style={[
                     styles.listItem,
-                    item.completed && { textDecoration: 'line-through' },
+                    item.completed && { textDecorationLine: 'line-through' },
                   ]}
                 >
                   {item.text}
                 </Text>
                 {!item.completed && (
-                  <Button
-                    title="✔️ "
-                    onPress={() => this.markComplete(index)}
-                  />
+                  <Button title="✔" onPress={() => this.markComplete(index)} />
                 )}
               </View>
               <View style={styles.hr} />
@@ -189,7 +186,6 @@ const styles = StyleSheet.create({
   textInput: {
     height: 40,
     paddingRight: 10,
-    paddingLeft: 10,
     borderColor: 'gray',
     width: '100%',
   },

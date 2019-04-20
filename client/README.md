@@ -1,68 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Native Web Starter
 
-## Available Scripts
+## Introduction
 
-In the project directory, you can run:
+This repo is intending to provide an easy starting point for developers looking to make fully cross platform applications across both web with [React Native Web](https://github.com/necolas/react-native-web) and mobile with [Expo](https://github.com/react-community/create-react-native-app).
 
-### `npm start`
+All branches represent a particular starting point.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+It is bootstrapped with [Create React App](https://github.com/facebook/create-react-app) so you can run `yarn web` in order to start up the development web server with all the hot reloading goodness you've come to expect.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+It has then been integrated with [Create React Native App](https://github.com/react-community/create-react-native-app) and running `yarn ios` or `yarn android` will start the Expo packager. You can also run the project from the Expo XDE program.
 
-### `npm test`
+Note that it should be possible to eject from Expo to native using `yarn eject-native`, however it is not possible to automatically eject from CRA web build. There are quite a few ways to manually port out of CRA web build as described in the following resources:
+- <https://github.com/facebook/create-react-app#popular-alternatives>
+- <https://reactjs.org/docs/add-react-to-a-website.html>
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Branches
 
-### `npm run build`
+| Branch                  | Description                                                                                                                                                              |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| master                  | The most minimal possible boilerplate, will always be the case                                                                                                           |
+| redux                   | Implements redux reducers, actions, store and connection including example                                                                                               |
+| navigation-react-router | Using react-router-dom, react-router-native and react-router-navigation in order to have a platform agnostic navigation solution including native look at feel on phones |
+| typescript              | Uses the TypeScript compiler with command `yarn watch` to track file changes and compile on the fly for stronger typed RNW code                                          |
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Get Started
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Clone the branch with the starting point you want and just rename the project (don't forget the `package.json`, Run `git remote rm origin && yarn` to remove the ref to this repo and install node_modules then you're good to go. 🙂
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A full list of the scripts defined in `package.json` is shown below.
 
-### `npm run eject`
+| Script              | Action                                                  |
+| ------------------- | ------------------------------------------------------- |
+| `yarn web`          | Start CRA Development Build                             |
+| `yarn build-web`    | Create production build for web                         |
+| `yarn start-expo`   | Start the Expo packager                                 |
+| `yarn start-native` | Start the native packager (not supported)               |
+| `yarn eject-native` | Eject from Expo                                         |
+| `yarn android`      | Start expo packager and install app to Android Emulator |
+| `yarn ios`          | Start expo packager and install app to iOS Simulator    |
+| `yarn test`         | not supported                                           |
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Future Plans for this Library
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The aim for this library is to make several branches that have different starting points i.e. Navigation, Auth etc.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Master branch will always be the most minimal starting point.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+I'm also toying with the idea of doing a starting point with React Native CLI instead of Expo however that will mean the UI for mobile will less predictiable than developing with Expo.
 
-## Learn More
+If you have any ideas for a boilerplate then please create an issue or even better a pull request! I'm hoping to get this repo to be a big hub for getting started with React Native Web with tutorials etc.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Tasks
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+*   ReasonML
 
-### Code Splitting
+### Credit
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+*   Huge thanks to [Nicolas Gallagher](https://github.com/necolas) for making React Native Web
+*   Thanks to [Expo](https://expo.io/) for making it so easy to get started with React Native development
+*   Thanks to [Yannick Spark](https://twitter.com/yannickdot) for writing [this great article](https://medium.com/@yannickdot/write-once-run-anywhere-with-create-react-native-app-and-react-native-web-ad40db63eed0) which inspired me to get started with React Native Web
