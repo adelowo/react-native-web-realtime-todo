@@ -12,8 +12,8 @@ import axios from 'axios';
 import Alert from './Alert';
 import Pusher from 'pusher-js/react-native';
 
-const APP_KEY = 'b738d32478149fc5b339';
-const APP_CLUSTER = 'eu';
+const APP_KEY = 'PUSHER_APP_KEY';
+const APP_CLUSTER = 'PUSHER_APP_CLUSTER';
 
 export default class App extends Component {
   state = {
