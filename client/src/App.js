@@ -6,6 +6,7 @@ import {
   FlatList,
   Button,
   TextInput,
+  SafeAreaView,
 } from 'react-native';
 import axios from 'axios';
 import Alert from './Alert';
@@ -119,41 +120,46 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={[styles.container]}>
-        <FlatList
-          style={styles.list}
-          data={this.state.tasks}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <View>
-              <View style={styles.listItemCont}>
-                <Text
-                  style={[
-                    styles.listItem,
-                    item.completed && { textDecorationLine: 'line-through' },
-                  ]}
-                >
-                  {item.text}
-                </Text>
-                {!item.completed && (
-                  <Button title="✔" onPress={() => this.markComplete(index)} />
-                )}
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#F5FCFF' }}>
+        <View style={[styles.container]}>
+          <FlatList
+            style={styles.list}
+            data={this.state.tasks}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <View>
+                <View style={styles.listItemCont}>
+                  <Text
+                    style={[
+                      styles.listItem,
+                      item.completed && { textDecorationLine: 'line-through' },
+                    ]}
+                  >
+                    {item.text}
+                  </Text>
+                  {!item.completed && (
+                    <Button
+                      title="✔"
+                      onPress={() => this.markComplete(index)}
+                    />
+                  )}
+                </View>
+                <View style={styles.hr} />
               </View>
-              <View style={styles.hr} />
-            </View>
-          )}
-        />
+            )}
+          />
 
-        <TextInput
-          style={styles.textInput}
-          onChangeText={this.changeTextHandler}
-          onSubmitEditing={this.addTask}
-          value={this.state.text}
-          placeholder="Add Tasks"
-          returnKeyType="done"
-          returnKeyLabel="done"
-        />
-      </View>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={this.changeTextHandler}
+            onSubmitEditing={this.addTask}
+            value={this.state.text}
+            placeholder="Add Tasks"
+            returnKeyType="done"
+            returnKeyLabel="done"
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 }
