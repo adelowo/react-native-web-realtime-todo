@@ -11,10 +11,14 @@ import axios from 'axios';
 import Alert from './Alert';
 import Pusher from 'pusher-js';
 
+const APP_KEY = 'b738d32478149fc5b339';
+const APP_CLUSTER = 'eu';
+
 export default class App extends Component {
   state = {
     tasks: [],
     text: '',
+    initiator: false,
   };
 
   changeTextHandler = text => {
@@ -40,6 +44,7 @@ export default class App extends Component {
             return {
               tasks: [...prevState.tasks, item],
               text: '',
+              initiator: true,
             };
           });
 
@@ -78,6 +83,37 @@ export default class App extends Component {
         tasks: res.data.tasks || [],
         text: '',
       });
+    });
+
+    const socket = new Pusher(APP_KEY, {
+      cluster: APP_CLUSTER,
+    });
+
+    const channel = socket.subscribe('todo');
+
+    channel.bind('items', data => {
+      if (!this.state.initiator) {
+        this.setState(prevState => {
+          return { tasks: [...prevState.tasks, data] };
+        });
+      } else {
+        this.setState({
+          initiator: false,
+        });
+      }
+    });
+
+    channel.bind('complete', data => {
+      if (!this.state.initiator) {
+        this.setState(prevState => {
+          prevState.tasks[data.index].completed = true;
+          return { tasks: [...prevState.tasks] };
+        });
+      } else {
+        this.setState({
+          initiator: false,
+        });
+      }
     });
   }
 

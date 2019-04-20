@@ -80,6 +80,8 @@ app.post('/items/complete', (req, res) => {
 
   todos[idx].completed = true;
 
+  pusher.trigger('todo', 'complete', { index: idx });
+
   res.status(200).send({
     status: true,
   });
