@@ -28,6 +28,10 @@ app.post('/pusher/auth', function(req, res) {
 
 const todos = [];
 
+app.get('/items', (req, res) => {
+  res.status(200).send({ tasks: todos });
+});
+
 app.post('/items', (req, res) => {
   const title = req.body.title;
 

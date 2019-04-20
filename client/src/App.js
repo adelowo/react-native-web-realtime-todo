@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import Alert from './Alert';
+import Pusher from 'pusher-js';
 
 export default class App extends Component {
   state = {
@@ -71,7 +72,14 @@ export default class App extends Component {
       });
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    axios.get('http://localhost:5200/items', {}).then(res => {
+      this.setState({
+        tasks: res.data.tasks || [],
+        text: '',
+      });
+    });
+  }
 
   render() {
     return (
