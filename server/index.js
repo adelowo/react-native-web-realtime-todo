@@ -28,7 +28,7 @@ app.post('/pusher/auth', function(req, res) {
 
 const todos = [];
 
-app.post('/item', (req, res) => {
+app.post('/items', (req, res) => {
   const title = req.body.title;
 
   if (title === undefined) {
@@ -69,6 +69,16 @@ app.post('/item', (req, res) => {
   res
     .status(200)
     .send({ message: 'TODO item was successfully created', status: true });
+});
+
+app.post('/items/complete', (req, res) => {
+  const idx = req.body.index;
+
+  todos[idx].completed = true;
+
+  res.status(200).send({
+    status: true,
+  });
 });
 
 app.set('port', process.env.PORT || 5200);

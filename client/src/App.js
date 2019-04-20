@@ -27,7 +27,7 @@ export default class App extends Component {
     }
 
     axios
-      .post('http://localhost:5200/item', { title: this.state.text })
+      .post('http://localhost:5200/items', { title: this.state.text })
       .then(res => {
         if (res.data.status) {
           this.setState(prevState => {
@@ -59,14 +59,16 @@ export default class App extends Component {
   };
 
   markComplete = i => {
-    // this.setState(
-    //   prevState => {
-    //     let tasks = prevState.tasks.slice();
-    //     tasks.splice(i, 1);
-    //     return { tasks: tasks };
-    //   },
-    //   () => Tasks.save(this.state.tasks)
-    // );
+    axios
+      .post('http://localhost:5200/items/complete', { index: i })
+      .then(res => {
+        if (res.data.status) {
+          this.setState(prevState => {
+            prevState.tasks[i].completed = true;
+            return { tasks: [...prevState.tasks] };
+          });
+        }
+      });
   };
 
   componentDidMount() {}
@@ -80,8 +82,20 @@ export default class App extends Component {
           renderItem={({ item, index }) => (
             <View>
               <View style={styles.listItemCont}>
-                <Text style={styles.listItem}>{item.text}</Text>
-                <Button title="✔️ " onPress={() => this.markComplete(index)} />
+                <Text
+                  style={[
+                    styles.listItem,
+                    item.completed && { textDecoration: 'line-through' },
+                  ]}
+                >
+                  {item.text}
+                </Text>
+                {!item.completed && (
+                  <Button
+                    title="✔️ "
+                    onPress={() => this.markComplete(index)}
+                  />
+                )}
               </View>
               <View style={styles.hr} />
             </View>
