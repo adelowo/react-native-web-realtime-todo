@@ -2,6 +2,8 @@
 
 One codebase, a realtime application on Android,iOS and the web. This makes use of https://github.com/necolas/react-native-web
 
+https://pusher.com/tutorials/todo-app-react-native-web
+
 #### Getting started
 
 - Clone this repository `git clone git@github.com:adelowo/react-native-web-realtime-todo.git`.
